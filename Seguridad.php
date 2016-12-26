@@ -7,8 +7,8 @@
     </head>
 <body>    
 <?php
-//	session_start();
-//	include ("/includes/autenticado.php");
+	session_start();
+	include ("/includes/autenticado.php");
 
 	// TODO 5: Comprobar autorización del usuario
 ?>

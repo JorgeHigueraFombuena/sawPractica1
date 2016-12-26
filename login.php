@@ -5,7 +5,6 @@ if (isset($_POST['registro'])) {
 }
 
 if (isset($_POST['login'])) {
-    // TODO 6: Comprobar captcha
 
     if ($_SESSION['CAPTCHA'] !== $_POST['valor']) {
         $_SESSION['autenticado'] = 'incorrecto';
@@ -17,13 +16,12 @@ if (isset($_POST['login'])) {
 
         if (mysqli_num_rows($resultado) == 1) {
             $usuario = mysqli_fetch_assoc($resultado);
-            // TODO 3 Comprobar el password de entrada con el de la BD
-            if (false) {
-                // TODO 3 La condición del if es que el password sea correcto
+            $password = hash("sha256", $_POST['passwd'] . $usuario['salt'], false);
+            if ($password === $usuario['password']) {
                 $_SESSION['autenticado'] = 'correcto';
                 $_SESSION['permisos'] = str_split($usuario['permisos']);
                 $_SESSION['user'] = $usuario['user'];
-                header("Location:MasterWeb.php");
+                header("Location: MasterWeb.php");
             } else {
                 $_SESSION['autenticado'] = 'incorrecto';
                 header("Location: NoAuth.php");
