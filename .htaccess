@@ -5,3 +5,14 @@
 #Require valid-user
 
 
+RewriteEngine On
+# This will enable the Rewrite capabilities
+
+RewriteCond %{SERVER_PORT} 80
+# This checks to make sure the connection is not already HTTPS – port 80 indicates a non-secured HTTP conection.
+
+RewriteRule ^(.*)$ https://www.miw.com/$1 [R=301,L]
+
+
+
+SSLRequireSSL
